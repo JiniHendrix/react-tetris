@@ -4,6 +4,9 @@ export default class Zig extends React.Component {
     constructor() {
         super();
     }
+    componentDidMount() {
+        this.props.funcs.addKeypressListener();
+    }
     render() {
         return (
             <div className='zig'>

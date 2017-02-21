@@ -4,6 +4,9 @@ export default class Square extends React.Component {
     constructor() {
         super();
     }
+    componentDidMount() {
+        this.props.funcs.addKeypressListener(this.props.id);
+    }
     render() {
         return (
             <div className='square'>
@@ -15,11 +18,3 @@ export default class Square extends React.Component {
         )
     }
 }
-//each item is made up of four squares
-//key presses make each individual square move a certain amount to mimic movement
-//state has functions for each piece, pass down accordingly
-//settimeout or interval to keep gameflow going
-//but how to make each individual piece?
-//do i put each in a container?
-//and position relatively to the container?
-//container is positioned relatively or absolutely to game window..
