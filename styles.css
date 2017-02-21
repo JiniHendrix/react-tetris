@@ -1,0 +1,145 @@
+.game-window {
+    position:relative;
+    height:690px;
+    width: 450px;
+    margin-left:20px;
+    margin-top:20px;
+    background-color:white;
+    float:left:
+}
+.score-board {
+    height:700px;
+    width:200px;
+    margin-right:10px;
+    margin-top:10px;
+    float:right;
+}
+.game-container {
+    height:740px;
+    width:640px;
+    background-color:#4CFFF0;
+    border-radius:10px;
+    margin-top:50px;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:hidden;
+}
+.block {
+    height:30px;
+    width:30px;
+    border:1px solid black;
+}
+.square {
+    position:absolute;
+}
+.square .block {
+    background-color:yellow;
+}
+.square .a {
+    position:absolute;
+}
+.square .b {
+    position:absolute;
+    left:30px;
+}
+.square .c {
+    position:absolute;
+    width:30px;
+    top:30px;
+}
+.square .d {
+    position:absolute;
+    top:30px;
+    left:30px;
+}
+.line {
+    position:absolute;
+    left:120px;
+}
+.line .block{
+    background-color:#14CC88;
+}
+.line .a {
+    position:absolute;
+}
+.line .b {
+    position:absolute;
+    top:30px;
+}
+.line .c {
+    position:absolute;
+    top:60px;
+}
+.line .d {
+    position:absolute;
+    top:90px;
+}
+.zig {
+    position:absolute;
+    left:200px;
+}
+.zig .block{
+    background-color:#CC9614;
+}
+.zig .a {
+    position:absolute;
+}
+.zig .b {
+    position:absolute;
+    left:-30px;
+}
+.zig .c {
+    position:absolute;
+    top:30px;
+}
+.zig .d {
+    position:absolute;
+    top:30px;
+    left:30px;
+}
+.zag {
+    position:absolute;
+    left:320px;
+}
+.zag .block{
+    background-color:#997E3D;
+}
+.zag .a {
+    position:absolute;
+}
+.zag .b {
+    position:absolute;
+    left:30px;
+}
+.zag .c {
+    position:absolute;
+    top:30px;
+}
+.zag .d {
+    position:absolute;
+    top:30px;
+    left:-30px;
+}
+.tee {
+    position:absolute;
+    top:200px;
+    left:30px;
+}
+.tee .block{
+    background-color:#FF7800;
+}
+.tee .a {
+    position:absolute;
+}
+.tee .b {
+    position:absolute;
+    left:-30px;
+}
+.tee .c {
+    position:absolute;
+    left:30px;
+}
+.tee .d {
+    position:absolute;
+    top:30px;
+}
