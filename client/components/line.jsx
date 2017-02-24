@@ -5,16 +5,15 @@ export default class Line extends React.Component {
         super();
     }
     componentDidMount() {
-        console.log("HELLO");
-        this.props.funcs.addKeypressListener();
+        this.props.funcs.setInitialPos(this.props.id);
     }
     render() {
         return (
-            <div className='line'>
-                <div className='block a'></div>
-                <div className='block b'></div>
-                <div className='block c'></div>
-                <div className='block d'></div>
+            <div className='line' id={this.props.id}>
+                <div className='block a' style={{top:'-30px', left:'0px'}}></div>
+                <div className='block b' style={{top:'0px', left:'0px'}}></div>
+                <div className='block c' style={{top:'30px',left:'0px'}}></div>
+                <div className='block d' style={{top:'60px',left:'0px'}}></div>
             </div>
         )
     }

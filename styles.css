@@ -5,7 +5,7 @@
     margin-left:20px;
     margin-top:20px;
     background-color:white;
-    float:left:
+    float:left;
 }
 .score-board {
     height:700px;
@@ -27,119 +27,59 @@
 .block {
     height:30px;
     width:30px;
-    border:1px solid black;
 }
 .square {
     position:absolute;
+    left:180px;
+    top:-30px;
 }
-.square .block {
+.square > * {
+    position:absolute;
     background-color:yellow;
-}
-.square .a {
-    position:absolute;
-}
-.square .b {
-    position:absolute;
-    left:30px;
-}
-.square .c {
-    position:absolute;
-    width:30px;
-    top:30px;
-}
-.square .d {
-    position:absolute;
-    top:30px;
-    left:30px;
 }
 .line {
     position:absolute;
-    left:120px;
 }
-.line .block{
+.line > * {
+    position:absolute;
     background-color:#14CC88;
-}
-.line .a {
-    position:absolute;
-}
-.line .b {
-    position:absolute;
-    top:30px;
-}
-.line .c {
-    position:absolute;
-    top:60px;
-}
-.line .d {
-    position:absolute;
-    top:90px;
 }
 .zig {
     position:absolute;
-    left:200px;
+    left:180px;
+    top:-30px;
 }
-.zig .block{
+.zig > * {
+    position:absolute;
     background-color:#CC9614;
-}
-.zig .a {
-    position:absolute;
-}
-.zig .b {
-    position:absolute;
-    left:-30px;
-}
-.zig .c {
-    position:absolute;
-    top:30px;
-}
-.zig .d {
-    position:absolute;
-    top:30px;
-    left:30px;
 }
 .zag {
     position:absolute;
-    left:320px;
+    left:180px;
+    top:-30px;
 }
-.zag .block{
+.zag > * {
+    position:absolute;
     background-color:#997E3D;
-}
-.zag .a {
-    position:absolute;
-}
-.zag .b {
-    position:absolute;
-    left:30px;
-}
-.zag .c {
-    position:absolute;
-    top:30px;
-}
-.zag .d {
-    position:absolute;
-    top:30px;
-    left:-30px;
 }
 .tee {
     position:absolute;
-    top:200px;
-    left:30px;
 }
-.tee .block{
+.tee > * {
+    position:absolute;
     background-color:#FF7800;
 }
-.tee .a {
+.leftL {
+    position: absolute;
+}
+.leftL > * {
+    position: absolute;
+    background-color: green;
+}
+.rightL {
     position:absolute;
 }
-.tee .b {
+.rightL > * {
     position:absolute;
-    left:-30px;
-}
-.tee .c {
-    position:absolute;
-    left:30px;
-}
-.tee .d {
-    position:absolute;
-    top:30px;
+    background-color:blue;
 }
