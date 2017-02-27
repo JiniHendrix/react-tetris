@@ -15,115 +15,132 @@ export default class Game extends React.Component {
       nextBlock: null,
       renderedBlocks: [],
       id: 0,
-      landedBlockPositions: [],
+      board: this.boardInit(),
       elem: null,
       currBlockState: 0,
       blockStates: {
         tee: [{
-          a: "top:0px; left:0px",
-          b: "top:0px;left:-30px",
-          c: "top:0px;left:30px",
-          d: "top:30px;left:0px",
+          a: {top:0, left:0},
+          b: {top:0,left:-30},
+          c: {top:0,left:30},
+          d: {top:30,left:0},
         }, {
-          a: "top:0px; left:0px",
-          b: "top:0px; left:-30px",
-          c: "top:-30px; left:0px",
-          d: "top:30px; left:0px",
+          a: {top:0, left:0},
+          b: {top:0, left:-30},
+          c: {top:-30, left:0},
+          d: {top:30, left:0},
         }, {
-          a: "top:0px; left:0px",
-          b: "top:0px; left:-30px",
-          c: "top:-30px; left:0px",
-          d: "top:0px; left:30px",
+          a: {top:0, left:0},
+          b: {top:0, left:-30},
+          c: {top:-30, left:0},
+          d: {top:0, left:30},
         }, {
-          a: "top:0px; left:0px",
-          b: "top:-30px; left:0px",
-          c: "top:0px; left:30px",
-          d: "top:30px; left:0px",
+          a: {top:0, left:0},
+          b: {top:-30, left:0},
+          c: {top:0, left:30},
+          d: {top:30, left:0},
         }],
         line: [{
-          a: "top:-30px; left:0px",
-          b: "top:0px; left:0px",
-          c: "top:30px; left:0px",
-          d: "top:60px; left:0px",
+          a: {top:-30, left:0},
+          b: {top:0, left:0},
+          c: {top:30, left:0},
+          d: {top:60, left:0},
         }, {
-          a: "top:0px; left:-30px",
-          b: "top:0px; left:0px",
-          c: "top:0px; left:30px",
-          d: "top:0px; left:60px",
+          a: {top:0, left:-30},
+          b: {top:0, left:0},
+          c: {top:0, left:30},
+          d: {top:0, left:60},
         }],
         zig: [{
-          a: "top:0px; left:0px",
-          b: "top:0px; left:30px",
-          c: "top:-30px; left:0px",
-          d: "top:-30px; left:-30px",
+          a: {top:0, left:0},
+          b: {top:0, left:30},
+          c: {top:-30, left:0},
+          d: {top:-30, left:-30},
         }, {
-          a: "top:0px; left:0px",
-          b: "top:30px; left:0px",
-          c: "top:0px; left:30px",
-          d: "top:-30px; left:30px",
+          a: {top:0, left:0},
+          b: {top:30, left:0},
+          c: {top:0, left:30},
+          d: {top:-30, left:30},
         }],
         zag: [{
-          a: "top:0px; left:0px",
-          b: "top:0px; left:-30px",
-          c: "top:-30px; left:0px",
-          d: "top:-30px; left:30px",
+          a: {top:0, left:0},
+          b: {top:0, left:-30},
+          c: {top:-30, left:0},
+          d: {top:-30, left:30},
         }, {
-          a: "top:0px; left:0px",
-          b: "top:-30px; left:0px",
-          c: "top:0px; left:30px",
-          d: "top:30px; left:30px",
+          a: {top:0, left:0},
+          b: {top:-30, left:0},
+          c: {top:0, left:30},
+          d: {top:30, left:30},
         }],
         rightL: [{
-          a: "top:-30px; left:30px",
-          b: "top:0px; left:30px",
-          c: "top:0px; left:0px",
-          d: "top:0px; left:-30px",
+          a: {top:-30, left:30},
+          b: {top:0, left:30},
+          c: {top:0, left:0},
+          d: {top:0, left:-30},
         }, {
-          a: "top:-30px; left:0px",
-          b: "top:30px; left:0px",
-          c: "top:0px; left:0px",
-          d: "top:30px; left:30px",
+          a: {top:-30, left:0},
+          b: {top:30, left:0},
+          c: {top:0, left:0},
+          d: {top:30, left:30},
         }, {
-          a: "top:0px; left:30px",
-          b: "top:0px; left:-30px",
-          c: "top:0px; left:0px",
-          d: "top:30px; left:-30px",
+          a: {top:0, left:30},
+          b: {top:0, left:-30},
+          c: {top:0, left:0},
+          d: {top:30, left:-30},
         }, {
-          a: "top:-30px; left:0px",
-          b: "top:-30px; left:-30px",
-          c: "top:0px; left:0px",
-          d: "top:30px; left:0px",
+          a: {top:-30, left:0},
+          b: {top:-30, left:-30},
+          c: {top:0, left:0},
+          d: {top:30, left:0},
         }],
         leftL: [{
-          a: "top:-30px; left:-30px",
-          b: "top:0px; left:-30px",
-          c: "top:0px; left:0px",
-          d: "top:0px; left:30px",
+          a: {top:-30, left:-30},
+          b: {top:0, left:-30},
+          c: {top:0, left:0},
+          d: {top:0, left:30},
         }, {
-          a: "top:-30px; left:0px",
-          b: "top:-30px; left:30px",
-          c: "top:0px; left:0px",
-          d: "top:30px; left:0px",
+          a: {top:-30, left:0},
+          b: {top:-30, left:30},
+          c: {top:0, left:0},
+          d: {top:30, left:0},
         }, {
-          a: "top:0px; left:-30px",
-          b: "top:0px; left:30px",
-          c: "top:0px; left:0px",
-          d: "top:30px; left:30px",
+          a: {top:0, left:-30},
+          b: {top:0, left:30},
+          c: {top:0, left:0},
+          d: {top:30, left:30},
         }, {
-          a: "top:-30px; left:0px",
-          b: "top:30px; left:0px",
-          c: "top:0px; left:0px",
-          d: "top:30px; left:-30px",
+          a: {top:-30, left:0},
+          b: {top:30, left:0},
+          c: {top:0, left:0},
+          d: {top:30, left:-30},
         }],
+        square:[
+          {
+            a: {top:0, left:0},
+            b: {top:0, left:30},
+            c: {top:30, left:0},
+            d: {top:30, left:30},
+          }
+        ]
 
       }
     };
     this.funcs = {};
     this.funcs.setInitialPos = this.setInitialPos.bind(this);
   }
+  boardInit() {
+    let board = [];
+    for (let i = 0; i < 690/30; i++) {
+      board.push(Array(450/30));
+    } return board;
+  }
+
   componentDidMount() {
     document.addEventListener('keydown', this.keypressHandler.bind(this));
-    this.setState({ nextBlock: this.randomBlock() }, this.addBlock.bind(this));
+    this.setState({ 
+      nextBlock: this.randomBlock(),
+    }, this.addBlock.bind(this));
   }
 
   setInitialPos(id) {
@@ -138,27 +155,40 @@ export default class Game extends React.Component {
 
   keypressHandler(e) {
     let [left, top] = this.getPos();
+    let direction;
 
-    if (e.keyCode === 37) left -= 30;
-    else if (e.keyCode === 39) left += 30;
-    else if (e.keyCode === 40) top += 30;
+    if (e.keyCode === 37) {
+      left -= 30;
+      direction = 'left';
+    }
+    else if (e.keyCode === 39) {
+      left += 30;
+      direction = 'right';
+    }
+    else if (e.keyCode === 40) {
+      top += 30;
+      direction = 'down';
+    }
     else if (e.keyCode === 38) {
       this.turn();
     }
 
-    if (!this.checkCollision(left, top))
+    if (!this.checkCollision(left, top, direction))
       this.state.elem.setAttribute("style", "top: " + top + "px; left: " + left + "px");
   }
 
   turn() {
     let className = this.state.elem.className;
+    if (className === 'square') return;
     let children = [...this.state.elem.children];
-    //increment currBlockState
+    
     const currBlockState = this.state.currBlockState + 1 === this.state.blockStates[className].length ? 0 : this.state.currBlockState + 1;
-    //set block styles by accessing corresponding blockStates with the className
+    
     children.forEach((child) => {
-      child.setAttribute("style", this.state.blockStates[className][currBlockState][child.className.slice(-1)]);
-    })
+      let childState = this.state.blockStates[className][currBlockState][child.className.slice(-1)];
+      child.setAttribute("style", "top:"+childState.top+"; left:"+childState.left);
+    });
+
     this.setState({ currBlockState });
   }
 
@@ -173,6 +203,7 @@ export default class Game extends React.Component {
       this.state.elem.setAttribute("style", "top:" + top + "px; left:" + left + "px");
       setTimeout(this.timer.bind(this, this.state.id), 500);
     } else {
+      this.recordPos();
       this.addBlock();
     }
   }
@@ -185,18 +216,39 @@ export default class Game extends React.Component {
     this.setState({ renderedBlocks: temp, id, nextBlock: this.randomBlock() }, this.timer.bind(this, id));
   }
 
-  checkCollision(left, top) {
+  checkCollision(left, top, direction = 'down') {
     const children = [...this.state.elem.children];
 
-    // children.forEach((child, i) => {
-    // });
-    if (left === 0 || left === 390 || top > 330) { return true; }
+    for (let i = 0; i < children.length; i ++) {
+      let childPos = this.state.blockStates[this.state.elem.className][this.state.currBlockState][children[i].className.slice(-1)];
+      const absLeft = (childPos.left + left) / 30;
+      const absTop = (childPos.top + top) / 30;
+      console.log(absLeft, absTop);
+      if (absLeft < 0 || absLeft >= 15 || absTop >= 22) {
+        return true;
+      }
+      if (absTop >= 0 && this.state.board[absTop][absLeft]) return true;
+
+    }
     return false;
+  }
 
-    //get all block positions of current block
-    //compare to all positions
-    //also check if there are complete rows
+  recordPos() {
+    const children = [...this.state.elem.children];
+    const temp = this.state.board;
+    let [left, top] = this.getPos();
 
+    children.forEach((child) => {
+      let childPos = this.state.blockStates[this.state.elem.className][this.state.currBlockState][child.className.slice(-1)];
+      const absLeft = (childPos.left + left) / 30;
+      const absTop = (childPos.top + top) / 30;
+      temp[absTop][absLeft] = { 
+        id: this.state.id,
+        block: child.className.slice(-1),  
+      }
+    });
+
+    this.setState({ board: temp }, ()=>{console.log(this.state.board)});
   }
 
   addKeypressListener(id) {
