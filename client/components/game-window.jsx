@@ -18,6 +18,8 @@ export default class Game extends React.Component {
       board: this.boardInit(),
       elem: null,
       currBlockState: 0,
+      INTERVAL: 100,
+      blocksInEachRow: this.blocksInEachRowInit(),
       blockStates: {
         tee: [{
           a: {top:0, left:0},
@@ -129,10 +131,18 @@ export default class Game extends React.Component {
     this.funcs = {};
     this.funcs.setInitialPos = this.setInitialPos.bind(this);
   }
+
   boardInit() {
     let board = [];
     for (let i = 0; i < 690/30; i++) {
       board.push(Array(450/30));
+    } return board;
+  }
+
+  blocksInEachRowInit() {
+    const board = [];
+    for (let i = 0; i < 23; i++) {
+      board.push(0);
     } return board;
   }
 
@@ -155,25 +165,20 @@ export default class Game extends React.Component {
 
   keypressHandler(e) {
     let [left, top] = this.getPos();
-    let direction;
 
     if (e.keyCode === 37) {
       left -= 30;
-      direction = 'left';
     }
     else if (e.keyCode === 39) {
       left += 30;
-      direction = 'right';
     }
     else if (e.keyCode === 40) {
       top += 30;
-      direction = 'down';
     }
     else if (e.keyCode === 38) {
       this.turn();
     }
-
-    if (!this.checkCollision(left, top, direction))
+    if (!this.checkCollision(left, top))
       this.state.elem.setAttribute("style", "top: " + top + "px; left: " + left + "px");
   }
 
@@ -181,7 +186,6 @@ export default class Game extends React.Component {
     let className = this.state.elem.className;
     if (className === 'square') return;
     let children = [...this.state.elem.children];
-    
     const currBlockState = this.state.currBlockState + 1 === this.state.blockStates[className].length ? 0 : this.state.currBlockState + 1;
     
     children.forEach((child) => {
@@ -198,14 +202,33 @@ export default class Game extends React.Component {
 
   timer(id) {
     let [left, top] = this.getPos();
+    top+= 30;
     if (!this.checkCollision(left, top)) {
-      top += 30;
       this.state.elem.setAttribute("style", "top:" + top + "px; left:" + left + "px");
-      setTimeout(this.timer.bind(this, this.state.id), 500);
+      setTimeout(this.timer.bind(this, this.state.id), this.state.INTERVAL);
     } else {
       this.recordPos();
+      this.deleteCompleteLines();
       this.addBlock();
     }
+  }
+
+  deleteCompleteLines() {
+    let deleted = 0;
+    //check if all values in a row are truthy
+    for (var i = 0; i < this.state.blocksInEachRow.length; i++) {
+      if (this.state.blocksInEachRow[i] === 15) {
+      //remove all blocks in completed rows from DOM
+        for (var j = 0; j < 15; j++) {
+          
+          let parent = document.getElementById(this.state.board[i][j].id);
+          parent.removeChild(parent.getElementsByClassName(this.state.board[i][j].blockClassName)[0]);
+          
+        }
+      }
+    }
+    //remove completed lines from virtual board and blocksInEachRow
+    //unshift the removed amount to virtual board and blocksInEachRow
   }
 
   addBlock() {
@@ -223,37 +246,35 @@ export default class Game extends React.Component {
       let childPos = this.state.blockStates[this.state.elem.className][this.state.currBlockState][children[i].className.slice(-1)];
       const absLeft = (childPos.left + left) / 30;
       const absTop = (childPos.top + top) / 30;
-      console.log(absLeft, absTop);
-      if (absLeft < 0 || absLeft >= 15 || absTop >= 22) {
+
+      if (absLeft < 0 || absLeft >= 15 || absTop >= 23) {
         return true;
       }
       if (absTop >= 0 && this.state.board[absTop][absLeft]) return true;
-
     }
     return false;
   }
 
   recordPos() {
     const children = [...this.state.elem.children];
-    const temp = this.state.board;
+    const boardState = this.state.board;
+    const blocksInEachRowState = this.state.blocksInEachRow;
     let [left, top] = this.getPos();
 
     children.forEach((child) => {
       let childPos = this.state.blockStates[this.state.elem.className][this.state.currBlockState][child.className.slice(-1)];
       const absLeft = (childPos.left + left) / 30;
       const absTop = (childPos.top + top) / 30;
-      temp[absTop][absLeft] = { 
+      boardState[absTop][absLeft] = { 
         id: this.state.id,
-        block: child.className.slice(-1),  
-      }
+        blockClassName: child.className.slice(-1),  
+      };
+      blocksInEachRowState[absTop]++;
     });
 
-    this.setState({ board: temp }, ()=>{console.log(this.state.board)});
+    this.setState({ board: boardState, blocksInEachRow: blocksInEachRowState });
   }
 
-  addKeypressListener(id) {
-    console.log('addKeypressListener', id);
-  }
   convertPosToNum(str) {
     return Number(str.replace('px', ''));
   }
